@@ -255,6 +255,7 @@ export default function AdminDashboard() {
                                         <p className="text-lg font-bold">{order.customerName}</p>
                                         <div className="text-xs text-white/50 space-y-1 mt-1">
                                             <p>{order.contactNumber}</p>
+                                            <p>{order.address}</p>
                                             <p>{new Date(order.timestamp).toLocaleString()}</p>
                                         </div>
                                     </div>
