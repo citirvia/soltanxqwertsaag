@@ -21,8 +21,14 @@ CREATE TABLE IF NOT EXISTS products (
   is_new BOOLEAN DEFAULT false,
   story TEXT,
   technical_specs TEXT[] DEFAULT '{}',
+  sizes TEXT[] DEFAULT '{}',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc', NOW())
 );
+
+-- Add sizes column to products table
+ALTER TABLE products 
+ADD COLUMN IF NOT EXISTS sizes TEXT[] DEFAULT '{}';
+
 
 -- Orders Table
 CREATE TABLE IF NOT EXISTS orders (
@@ -32,10 +38,15 @@ CREATE TABLE IF NOT EXISTS orders (
   customer_phone TEXT,
   customer_address TEXT,
   items JSONB NOT NULL,
+  sizes TEXT[] DEFAULT '{}',
   total NUMERIC NOT NULL,
   status TEXT DEFAULT 'pending',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc', NOW())
 );
+
+-- Add sizes column to orders table if it doesn't exist
+ALTER TABLE orders 
+ADD COLUMN IF NOT EXISTS sizes TEXT[] DEFAULT '{}';
 
 -- Admin Whitelist Table
 CREATE TABLE IF NOT EXISTS admin_whitelist (
